@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <title>Simple Swap Sepolia</title>
+
+  <!-- ethers v5 -->
   <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
 </head>
 <body>
 
-<h2>Swap Token (Sepolia)</h2>
+  <h2>Simple Swap Sepolia</h2>
 
-<button onclick="connect()">Connect Wallet</button>
-<p id="wallet"></p>
+  <button onclick="connect()">Connect Wallet</button>
+  <p id="wallet">Not connected</p>
 
-<hr>
+  <hr />
 
-<input id="tokenIn" placeholder="Token In Address">
-<input id="tokenOut" placeholder="Token Out Address">
-<br><br>
+  <input id="tokenIn" placeholder="Token In Address" style="width:400px"><br><br>
+  <input id="tokenOut" placeholder="Token Out Address" style="width:400px"><br><br>
+  <input id="amountIn" placeholder="Amount In"><br><br>
 
-<input id="amountIn" placeholder="Amount In">
-<br><br>
+  <button onclick="swap()">Swap</button>
 
-<button onclick="swap()">Swap</button>
-
-<script src="app.js"></script>
+  <!-- app.js HARUS PALING BAWAH -->
+  <script src="app.js"></script>
 </body>
 </html>
