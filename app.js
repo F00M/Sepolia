@@ -15,18 +15,32 @@ const erc20Abi = [
 ];
 
 // ================= CONNECT =================
+let provider;
+let signer;
+let detectedProvider = null;
+
+// listen provider (MetaMask)
+window.addEventListener("eip6963:announceProvider", (event) => {
+  if (event.detail.info.name === "MetaMask") {
+    detectedProvider = event.detail.provider;
+  }
+});
+
+// request provider
+window.dispatchEvent(new Event("eip6963:requestProvider"));
+
 async function connect() {
-  if (typeof window.ethereum === "undefined") {
-    alert("MetaMask belum terinstall");
+  if (!detectedProvider) {
+    alert("MetaMask tidak terdeteksi");
     return;
   }
 
-  provider = new ethers.providers.Web3Provider(window.ethereum);
+  provider = new ethers.providers.Web3Provider(detectedProvider);
   await provider.send("eth_requestAccounts", []);
   signer = provider.getSigner();
 
-  const address = await signer.getAddress();
-  document.getElementById("wallet").innerText = address;
+  document.getElementById("wallet").innerText =
+    await signer.getAddress();
 }
 
 // ================= DECIMALS =================
